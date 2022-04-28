@@ -6,19 +6,17 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
-
-* System dependencies
+	`ruby 2.6.3`
 
 * Configuration
+	Run `bundle install` command to insall gems
 
 * Database creation
+	Run `rails db:setup` to create database
+	Run `rails db:migrate` to migrate all tables
 
-* Database initialization
+* Database records
+	Run `rails db:seed` to create data in DB
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Application Start instructions
+	GO inside app folder and run the `rails s` command to start the server

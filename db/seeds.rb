@@ -5,3 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Reward.create(name: "Coffee")
+Reward.create(name: "Airport Lounge Access")
+Reward.create(name: "Birthday Coffee")
+Reward.create(name: "5% Cash Rebate")
+Reward.create(name: "Movie Ticket")
+
+Tier.create(name: "standard")
+Tier.create(name: "vip")
+Tier.create(name: "premium")

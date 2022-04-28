@@ -5,14 +5,14 @@
 
 
 every 1.day do
-  runner "RewardJob.new.reward_for_dob"
-  runner "RewardJob.new.reward_for_transactions"
+  runner "RewardCalculationJob.new.date_of_birth_reward_calculation"
+  runner "RewardCalculationJob.new.transaction_reward_calculation"
 end
 
 every 1.year, :at => 'December 31th 11:59pm' do
-  runner "RewardJob.new.expire_points"
+  runner "RewardCalculationJob.new.expire_points"
 end
 
 every 3.months, :at => '11:59pm' do
-  runner "RewardJob.new.bonus_points"
+  runner "RewardCalculationJob.new.bonus_points"
 end

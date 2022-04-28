@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if params[:user_search]
       User.where('email LIKE ?', "%#{params[:user_search]}%")
     else
-      all
+      User.all
     end
   end
   

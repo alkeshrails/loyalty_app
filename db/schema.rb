@@ -10,10 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_28_092953) do
+ActiveRecord::Schema.define(version: 2022_04_28_102318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bills", force: :cascade do |t|
+    t.integer "amount"
+    t.boolean "foreign_country", default: true
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_bills_on_user_id"
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "score"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_points_on_user_id"
+  end
+
+  create_table "rewards", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_rewards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "reward_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reward_id"], name: "index_user_rewards_on_reward_id"
+    t.index ["user_id"], name: "index_user_rewards_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,8 +60,13 @@ ActiveRecord::Schema.define(version: 2022_04_28_092953) do
     t.integer "points", default: 0
     t.string "date_of_birth"
     t.integer "phone_number"
+    t.string "tier_type", default: "standard"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bills", "users"
+  add_foreign_key "points", "users"
+  add_foreign_key "user_rewards", "rewards"
+  add_foreign_key "user_rewards", "users"
 end

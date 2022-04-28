@@ -23,12 +23,10 @@ class BillsController < ApplicationController
   def create
     @bill = Bill.new(bill_params)
 
-    respond_to do |format|
-      if @bill.save
-        redirect_to users_path
-      else
-        render :new
-      end
+    if @bill.save
+      redirect_to users_path
+    else
+      render :new
     end
   end
 

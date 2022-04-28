@@ -11,7 +11,7 @@ class Bill < ApplicationRecord
     self.user.update_attribute(:points, user.points + points)
 
     point_create(points)
-    RewardJob.perform_now(user)
+    RewardCalculationJob.perform_now(user)
   end
 
   def point_create(points)
@@ -22,7 +22,7 @@ class Bill < ApplicationRecord
     bills = Bill.where(user_id: user.id)
 
     if (bills.count.eql?(1)) && (self.amount > 1000)
-      UserReward.create(user_id: user.id, reward_id: Reward.birthday_coffee.first&.id)
+      UserReward.create(user_id: user.id, reward_id: Reward.movie_ticket.first&.id)
     end
   end
 end
